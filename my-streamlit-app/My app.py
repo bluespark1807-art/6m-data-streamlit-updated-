@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 # Sets the page configuration
 # You can set the page title and layout here
 st.set_page_config(page_title="HDB Resale Dashboard", layout="wide")
@@ -19,8 +20,9 @@ st.markdown("""
 
 import streamlit as st
 import pandas as pd
+from pathlib import Path
 
-DATA_PATH = "/home/joannequek/6m-data-streamlit-updated-/data/resale_data.csv"
+DATA_PATH = Path(__file__).resolve().parent / "data" / "resale_data.csv"
 
 df = pd.read_csv(DATA_PATH)
 # Lesson assumption:
@@ -120,7 +122,7 @@ with col_left:
     # Create a Plotly bar chart with towns on x-axis and average resale price on y-axis
     fig_town = px.bar(avg_price_by_town, x="town", y="resale_price")
     # Display the Plotly chart in Streamlit
-    st.plotly_chart(fig_town, width="stretch")
+    st.plotly_chart(fig_town, use_container_width=True)
 
 # Tells Streamlit to put the following content in the right column
 with col_right:
